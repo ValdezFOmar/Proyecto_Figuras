@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Draw
 {
+    //Implementar un menu/toolbar
+    //Implementar otra figura (triangulo) 
+    //Agregar <public enum estado{"estados"}> y <public enum dibujaEstaFigura{"figuras"}>
     //Probando push
     public partial class Form1 : Form
     {
