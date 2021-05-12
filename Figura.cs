@@ -42,8 +42,35 @@ namespace Draw
         }
         public Figura(Punto punto1, Punto punto2)
         {
-            this.punto1 = punto1;
-            this.punto2 = punto2;
+            //Agregar el resto de casos para dibujar figuras
+            if (punto1.x <= punto2.x && punto1.y <= punto2.y)
+            {
+                this.punto1 = punto1;
+                this.punto2 = punto2;
+            }
+            else if (punto1.x >= punto2.x && punto1.y <= punto2.y)
+            {
+                int temp;
+                temp = punto1.x;
+                punto1.x = punto2.x;
+                punto2.x = temp;
+                this.punto1 = punto1;
+                this.punto2 = punto2;
+            }
+            else if (punto1.x <= punto2.x && punto1.y >= punto2.y)
+            {
+                int temp;
+                temp = punto1.y;
+                punto1.y = punto2.y;
+                punto2.y = temp;
+                this.punto1 = punto1;
+                this.punto2 = punto2;
+            }
+            else if (punto1.x >= punto2.x && punto1.y >= punto2.y)
+            {
+                this.punto1 = punto2;
+                this.punto2 = punto1;
+            }
             colorRelleno = Color.White;
             colorContorno = Color.Black;
         }
@@ -85,6 +112,20 @@ namespace Draw
             Graphics graphics = forma.CreateGraphics();
             graphics.FillEllipse(new SolidBrush(colorRelleno), punto1.x, punto1.y, punto2.x - punto1.x, punto2.y - punto1.y);
             graphics.DrawEllipse(new Pen(colorContorno), punto1.x, punto1.y, punto2.x - punto1.x, punto2.y - punto1.y);
+        }
+    }
+    class Triangulo : Figura
+    {
+        public Triangulo(Punto punto1, Punto punto2) : base(punto1, punto2)
+        {
+
+        }
+        public override void Dibuja(Form forma)
+        {
+            Graphics graphics = forma.CreateGraphics();
+            Point[] puntos = { new Point(punto1.x, punto2.y), new Point((punto2.x + punto1.x) / 2, punto1.y), new Point(punto2.x, punto2.y)};
+            graphics.FillPolygon(new SolidBrush(colorRelleno), puntos);
+            graphics.DrawPolygon(new Pen(colorContorno), puntos);
         }
     }
 }

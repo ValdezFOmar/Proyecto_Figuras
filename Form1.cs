@@ -10,15 +10,15 @@ using System.Windows.Forms;
 
 namespace Draw
 {
-    //Implementar un menu/toolbar
     //Implementar otra figura (triangulo) 
-    //Agregar <public enum estado{"estados"}> y <public enum dibujaEstaFigura{"figuras"}>
-    //Probando push
     public partial class Form1 : Form
     {
+        public enum DibujaEstaFigura { rectangulo, elipse, triangulo}
+        public enum Estado { normal, dibujando, moviendo, seleccionando }
         List<Figura> figuras = new List<Figura>();
 
-        private string estado = "normal";
+        private int estado = (int)Estado.normal;
+        private int dibujaEstaFigura = (int)DibujaEstaFigura.rectangulo;
         private Punto p1_actual;
         private Figura figuraSeleccionada;
 
@@ -48,48 +48,54 @@ namespace Draw
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (estado == "dibujando")
+            if (estado == (int)Estado.dibujando)
             {
-                estado = "moviendo";
+                estado = (int)Estado.moviendo;
                 label1.Text = String.Format($"x:{e.X}, y:{e.Y}");
                 p1_actual = new Punto(e.X, e.Y);
             }
-            else if (estado == "seleccionando")
+            else if (estado == (int)Estado.seleccionando)
             {
                 figuraSeleccionada = Selecciona(e.X, e.Y);
                 if(figuraSeleccionada!=null)
                 {
-                    button2.Text = String.Format($"x:{figuraSeleccionada.punto1.x}, y:{figuraSeleccionada.punto1.y}");
+                    label1.Text = String.Format($"x:{figuraSeleccionada.punto1.x}, y:{figuraSeleccionada.punto1.y}");
                 }
             }
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (estado == "moviendo")
+            if (estado == (int)Estado.moviendo)
             {
-                estado = "dibujando";
+                estado = (int)Estado.dibujando;
 
                 label1.Text = String.Format($"x:{e.X}, y:{e.Y}");
 
-                if (e.Button == MouseButtons.Left)
+                if (dibujaEstaFigura == (int)DibujaEstaFigura.rectangulo)
                 {
                     Rectangulo r = new Rectangulo(p1_actual, new Punto(e.X, e.Y));
                     r.Dibuja(this);
                     figuras.Add(r);
                 }
-                else if (e.Button == MouseButtons.Right)
+                else if (dibujaEstaFigura == (int)DibujaEstaFigura.elipse)
                 {
                     Elipse elipse = new Elipse(p1_actual, new Punto(e.X, e.Y));
                     elipse.Dibuja(this);
                     figuras.Add(elipse);
+                }
+                else if (dibujaEstaFigura == (int)DibujaEstaFigura.triangulo)
+                {
+                    Triangulo triangulo = new Triangulo(p1_actual, new Punto(e.X, e.Y));
+                    triangulo.Dibuja(this);
+                    figuras.Add(triangulo);
                 }
             }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (estado == "dibujando")
+            if (estado == (int)Estado.dibujando)
             {
                 label1.Text = String.Format($"x:{e.X}, y:{e.Y}");
             }
@@ -100,16 +106,6 @@ namespace Draw
             this.DibujaFiguras();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            estado = "seleccionando";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            estado = "dibujando";
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             if (figuraSeleccionada != null)
@@ -118,11 +114,36 @@ namespace Draw
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void dibujarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            estado = (int)Estado.seleccionando;
+        }
+
+        private void dibujarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            estado = (int)Estado.dibujando;
+        }
+
+        private void ordenarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             figuras.Sort();
             figuras.Reverse();
             DibujaFiguras();
+        }
+
+        private void rectanguloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dibujaEstaFigura = (int)DibujaEstaFigura.rectangulo;
+        }
+
+        private void elipseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dibujaEstaFigura = (int)DibujaEstaFigura.elipse;
+        }
+
+        private void trianguloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dibujaEstaFigura = (int)DibujaEstaFigura.triangulo;
         }
     }
 }
