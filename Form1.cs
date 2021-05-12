@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace Draw
 {
-    //Implementar otra figura (triangulo) 
     public partial class Form1 : Form
     {
         public enum DibujaEstaFigura { rectangulo, elipse, triangulo}
@@ -106,14 +105,6 @@ namespace Draw
             this.DibujaFiguras();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (figuraSeleccionada != null)
-            {
-                figuraSeleccionada.colorRelleno = Color.Red;
-            }
-        }
-
         private void dibujarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             estado = (int)Estado.seleccionando;
@@ -144,6 +135,30 @@ namespace Draw
         private void trianguloToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dibujaEstaFigura = (int)DibujaEstaFigura.triangulo;
+        }
+
+        private void contornoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (figuraSeleccionada != null)
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    figuraSeleccionada.colorContorno = colorDialog.Color;
+                    figuraSeleccionada.Dibuja(this);
+                }
+            }
+        }
+
+        private void rellenoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (figuraSeleccionada != null)
+            {
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+                    figuraSeleccionada.colorRelleno = colorDialog.Color;
+                    figuraSeleccionada.Dibuja(this);
+                }
+            }
         }
     }
 }

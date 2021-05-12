@@ -42,7 +42,6 @@ namespace Draw
         }
         public Figura(Punto punto1, Punto punto2)
         {
-            //Agregar el resto de casos para dibujar figuras
             if (punto1.x <= punto2.x && punto1.y <= punto2.y)
             {
                 this.punto1 = punto1;

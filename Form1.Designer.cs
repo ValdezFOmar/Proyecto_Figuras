@@ -30,7 +30,6 @@ namespace Draw
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dibujarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dibujarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +40,7 @@ namespace Draw
             this.contornoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rellenoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordenarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,17 +51,6 @@ namespace Draw
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 0;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.Location = new System.Drawing.Point(713, 41);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 30);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Rojo";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // menuStrip1
             // 
@@ -81,7 +70,7 @@ namespace Draw
             // dibujarToolStripMenuItem
             // 
             this.dibujarToolStripMenuItem.Name = "dibujarToolStripMenuItem";
-            this.dibujarToolStripMenuItem.Size = new System.Drawing.Size(99, 26);
+            this.dibujarToolStripMenuItem.Size = new System.Drawing.Size(99, 24);
             this.dibujarToolStripMenuItem.Text = "Seleccionar";
             this.dibujarToolStripMenuItem.Click += new System.EventHandler(this.dibujarToolStripMenuItem_Click);
             // 
@@ -123,25 +112,27 @@ namespace Draw
             this.contornoToolStripMenuItem,
             this.rellenoToolStripMenuItem});
             this.pintarToolStripMenuItem.Name = "pintarToolStripMenuItem";
-            this.pintarToolStripMenuItem.Size = new System.Drawing.Size(61, 26);
+            this.pintarToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.pintarToolStripMenuItem.Text = "Pintar";
             // 
             // contornoToolStripMenuItem
             // 
             this.contornoToolStripMenuItem.Name = "contornoToolStripMenuItem";
-            this.contornoToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.contornoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.contornoToolStripMenuItem.Text = "Contorno";
+            this.contornoToolStripMenuItem.Click += new System.EventHandler(this.contornoToolStripMenuItem_Click);
             // 
             // rellenoToolStripMenuItem
             // 
             this.rellenoToolStripMenuItem.Name = "rellenoToolStripMenuItem";
-            this.rellenoToolStripMenuItem.Size = new System.Drawing.Size(154, 26);
+            this.rellenoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.rellenoToolStripMenuItem.Text = "Relleno";
+            this.rellenoToolStripMenuItem.Click += new System.EventHandler(this.rellenoToolStripMenuItem_Click);
             // 
             // ordenarToolStripMenuItem
             // 
             this.ordenarToolStripMenuItem.Name = "ordenarToolStripMenuItem";
-            this.ordenarToolStripMenuItem.Size = new System.Drawing.Size(77, 26);
+            this.ordenarToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
             this.ordenarToolStripMenuItem.Text = "Ordenar";
             this.ordenarToolStripMenuItem.Click += new System.EventHandler(this.ordenarToolStripMenuItem_Click);
             // 
@@ -151,7 +142,6 @@ namespace Draw
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -171,7 +161,6 @@ namespace Draw
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dibujarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dibujarToolStripMenuItem1;
@@ -182,6 +171,7 @@ namespace Draw
         private System.Windows.Forms.ToolStripMenuItem contornoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rellenoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenarToolStripMenuItem;
+        private System.Windows.Forms.ColorDialog colorDialog;
     }
 }
 
